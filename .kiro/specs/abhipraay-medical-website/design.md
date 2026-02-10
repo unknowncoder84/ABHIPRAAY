@@ -91,21 +91,32 @@ interface HeroSectionProps {
     label: string;
     action: 'call' | 'whatsapp' | 'email';
     href: string;
+    color: 'blue' | 'green';
   }[];
 }
 ```
 
 **Key Features**:
 - Auto-sliding image carousel with Ken Burns zoom effect
-- Three action buttons (Call, WhatsApp, Gmail)
+- Background image with dark overlay effect for better text contrast
+- Three action buttons with specific colors:
+  - Call Now: Blue (#3b82f6)
+  - WhatsApp: Green (#10b981)
+  - Email Us: Blue (#3b82f6)
 - Responsive text sizing
 - Smooth fade-in animation on load
+
+**Visual Enhancements**:
+- Background image with dark navy overlay (rgba(30, 58, 138, 0.85))
+- Enhanced text contrast with white text on dark background
+- Gradient overlay from navy (#1e3a8a) to transparent
+- Colored action buttons with hover effects
 
 **Animation Behavior**:
 - Images transition every 5 seconds
 - Slow zoom from 100% to 110% scale over 5 seconds
 - Crossfade transition between images
-- Buttons have hover ripple effect
+- Buttons have hover ripple effect and scale animation
 
 #### 2. Navigation Bar Component
 
@@ -163,7 +174,7 @@ interface ServiceCardProps {
 
 #### 4. Image Slider Component
 
-**Purpose**: Auto-scrolling horizontal image gallery
+**Purpose**: Auto-scrolling horizontal image gallery with enhanced navigation
 
 **Props Interface**:
 ```typescript
@@ -171,21 +182,33 @@ interface ImageSliderProps {
   images: string[];
   autoScrollSpeed?: number;
   pauseOnHover?: boolean;
+  showNavigation?: boolean;
+  showIndicators?: boolean;
 }
 ```
 
 **Key Features**:
-- Infinite horizontal scroll
+- Infinite horizontal scroll with smooth transitions
 - Auto-scroll with configurable speed
-- Pause on hover
-- Smooth transitions
+- Pause on hover functionality
+- Navigation arrows for manual control
+- Dot indicators showing current position
+- Smooth scroll behavior with momentum
 - Responsive image sizing
+
+**Visual Enhancements**:
+- Left/right navigation arrows with hover effects
+- Dot indicators at bottom for position tracking
+- Enhanced scrolling with snap points
+- Smooth momentum-based scrolling
+- Better touch/swipe support for mobile
 
 **Implementation Details**:
 - Use CSS transforms for smooth scrolling
 - Duplicate images for seamless loop
 - RequestAnimationFrame for smooth animation
 - Intersection Observer for pause/resume
+- Touch event handlers for swipe gestures
 
 #### 5. Floating WhatsApp Button Component
 
@@ -212,7 +235,7 @@ interface WhatsAppButtonProps {
 
 ```typescript
 interface ButtonProps {
-  variant: 'primary' | 'secondary' | 'outline';
+  variant: 'primary' | 'secondary' | 'outline' | 'call' | 'whatsapp' | 'email';
   size: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
   onClick?: () => void;
@@ -225,8 +248,56 @@ interface ButtonProps {
 - **Primary**: Soft blue background, white text
 - **Secondary**: White background, blue text
 - **Outline**: Transparent with blue border
+- **Call**: Blue background (#3b82f6), white text
+- **WhatsApp**: Green background (#10b981), white text
+- **Email**: Blue background (#3b82f6), white text
 
 **Animation**: Ripple effect on click, scale on hover
+
+#### Contact Card Component
+
+```typescript
+interface ContactCardProps {
+  icon: React.ReactNode;
+  iconColor: 'blue' | 'green' | 'purple' | 'orange';
+  title: string;
+  content: string;
+  action?: {
+    label: string;
+    href: string;
+  };
+}
+```
+
+**Visual Features**:
+- Card-based layout with glassmorphism
+- Colored circular icon backgrounds:
+  - Blue (#3b82f6): Phone
+  - Green (#10b981): WhatsApp
+  - Purple (#8b5cf6): Email
+  - Orange (#f97316): Location
+- Hover effects with scale and shadow
+- Responsive grid layout
+
+#### Footer Component
+
+```typescript
+interface FooterProps {
+  contactInfo: ContactInfo;
+  socialLinks?: {
+    platform: string;
+    url: string;
+    icon: React.ReactNode;
+  }[];
+}
+```
+
+**Visual Features**:
+- Dark blue gradient background (from #1e3a8a to #2563eb)
+- White text for high contrast
+- Multi-column layout (responsive)
+- Social media icons with hover effects
+- Copyright and clinic information
 
 #### Animated Icon Component
 
@@ -279,6 +350,7 @@ export default function HomePage() {
       <TrustSection />
       <GallerySection />
       <ContactSection />
+      <Footer />
     </main>
   );
 }
@@ -448,7 +520,21 @@ const heroImages: HeroImage[] = [
 
 ## Design System
 
+### Enhanced Visual Styling
+
+The ABHIPRAAY website features an enhanced visual design with richer colors, better contrast, and more sophisticated styling:
+
+**Key Visual Enhancements**:
+1. **Richer Color Palette**: Navy blue (#1e3a8a) to lighter blues (#2563eb) gradient scheme
+2. **Hero Background**: Background image with dark overlay for better text contrast
+3. **Colored Action Buttons**: Specific colors for different actions (blue for call/email, green for WhatsApp)
+4. **Enhanced Gallery**: Navigation arrows and dot indicators for better user control
+5. **Card-Based Contact Section**: Individual cards with colored icon backgrounds
+6. **Dark Footer**: Navy to blue gradient background for premium feel
+
 ### Color Palette
+
+**Enhanced Color Scheme**: The design now uses a richer blue gradient scheme with navy tones for a more premium, sophisticated look.
 
 ```typescript
 // tailwind.config.ts
@@ -460,16 +546,24 @@ const colors = {
     300: '#93c5fd',
     400: '#60a5fa',
     500: '#3b82f6',  // Main blue
-    600: '#2563eb',
+    600: '#2563eb',  // Rich blue (footer gradient end)
     700: '#1d4ed8',
     800: '#1e40af',
-    900: '#1e3a8a',
+    900: '#1e3a8a',  // Navy blue (footer gradient start, hero overlay)
   },
   medical: {
     white: '#ffffff',
     lightBlue: '#f0f9ff',
     softBlue: '#e0f2fe',
     trustBlue: '#0ea5e9',
+    navy: '#1e3a8a',      // Primary navy for hero overlay and footer
+    richBlue: '#2563eb',  // Secondary blue for gradients
+  },
+  action: {
+    blue: '#3b82f6',      // Call Now and Email buttons
+    green: '#10b981',     // WhatsApp button
+    purple: '#8b5cf6',    // Contact card icon background
+    orange: '#f97316',    // Contact card icon background
   },
   neutral: {
     50: '#fafafa',
@@ -1043,6 +1137,46 @@ A property is a characteristic or behavior that should hold true across all vali
 **Validates: Requirements 12.1**
 
 **Testing Approach**: Render hero section, check image src attributes, verify they point to expected local paths in /images/hero/ directory.
+
+### Property 18: Hero Background Overlay
+
+*For any* hero section render, the background should include a dark overlay effect (navy with opacity) over the background image for text contrast.
+
+**Validates: Requirements 1.1, 1.2**
+
+**Testing Approach**: Render hero section, check for overlay element with appropriate background color and opacity values.
+
+### Property 19: Action Button Color Mapping
+
+*For any* action button type (call, whatsapp, email), the button should render with its designated color (blue for call/email, green for WhatsApp).
+
+**Validates: Requirements 1.5, 1.6, 1.7, 1.8**
+
+**Testing Approach**: Render action buttons, verify background colors match the specified color scheme for each button type.
+
+### Property 20: Gallery Navigation Controls
+
+*For any* gallery slider render, the component should include navigation arrows and dot indicators for manual control.
+
+**Validates: Requirements 6.1, 6.4**
+
+**Testing Approach**: Render gallery slider, verify presence of left/right arrow buttons and dot indicator elements.
+
+### Property 21: Contact Card Icon Colors
+
+*For any* contact card, the icon background should use one of the designated colors (blue, green, purple, orange) based on the contact type.
+
+**Validates: Requirements 7.1, 7.2, 7.4, 7.5**
+
+**Testing Approach**: Render contact cards, verify icon background colors match the specified color scheme for each contact type.
+
+### Property 22: Footer Gradient Background
+
+*For any* footer render, the background should apply a gradient from navy (#1e3a8a) to rich blue (#2563eb).
+
+**Validates: Requirements 9.1**
+
+**Testing Approach**: Render footer, check computed background styles for gradient with correct color stops.
 
 ## Error Handling
 

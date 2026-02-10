@@ -34,6 +34,7 @@ export const ServicesSection = () => {
               description={service.description}
               iconName={service.iconName}
               index={index}
+              serviceId={service.id}
             />
           ))}
         </div>

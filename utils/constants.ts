@@ -89,20 +89,20 @@ export const CONTACT_INFO: ContactInfo = {
 export const HERO_IMAGES: HeroImage[] = [
   {
     id: 'hero-1',
-    url: '/images/hero/clinic-1.jpg',
-    alt: 'ABHIPRAAY medical facility exterior',
+    url: '/images/gallery/clinic-1.jpg',
+    alt: 'ABHIPRAAY medical facility',
     order: 1,
   },
   {
     id: 'hero-2',
-    url: '/images/hero/clinic-2.jpg',
-    alt: 'Advanced ultrasound equipment',
+    url: '/images/gallery/clinic-2.jpg',
+    alt: 'Advanced medical equipment',
     order: 2,
   },
   {
     id: 'hero-3',
-    url: '/images/hero/clinic-3.jpg',
-    alt: 'Professional medical consultation',
+    url: '/images/gallery/clinic-3.jpg',
+    alt: 'Professional medical care',
     order: 3,
   },
 ];
