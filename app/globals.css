@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+
+  * {
+    @apply border-neutral-200;
+  }
+
+  body {
+    @apply bg-white text-neutral-900;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Glassmorphism utility classes */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20 shadow-xl;
+  }
+
+  .glass-navbar {
+    @apply bg-white/70 backdrop-blur-md border-b border-white/20;
+  }
+
+  .glass-overlay {
+    @apply bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-sm;
+  }
+
+  /* Container utility */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Section spacing */
+  .section-spacing {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  /* Typography utilities */
+  .heading-1 {
+    @apply text-5xl md:text-6xl lg:text-7xl font-bold font-poppins;
+  }
+
+  .heading-2 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold font-poppins;
+  }
+
+  .heading-3 {
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold font-poppins;
+  }
+
+  .heading-4 {
+    @apply text-2xl md:text-3xl font-semibold font-poppins;
+  }
+
+  .heading-5 {
+    @apply text-xl md:text-2xl font-medium font-poppins;
+  }
+
+  .body-text {
+    @apply text-base md:text-lg font-inter;
+  }
+
+  .small-text {
+    @apply text-sm md:text-base font-inter;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation performance optimization */
+  .will-animate {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+  }
+}
