@@ -52,9 +52,9 @@ export const Button: React.FC<ButtonProps> = ({
   type = 'button',
   ariaLabel,
 }) => {
-  const [ripples, setRipples] = useState<RippleEffect[]>();
+  const [ripples, setRipples] = useState<RippleEffect[]>([]);
   const rippleIdRef = useRef(0);
-  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement | null>(null);
 
   // Variant styles
   const variantStyles = {
@@ -120,7 +120,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   // Common props for both button and link
   const commonProps = {
-    ref: buttonRef as any,
+    ref: buttonRef as React.Ref<HTMLButtonElement & HTMLAnchorElement>,
     className: combinedStyles,
     onClick: handleClick,
     'aria-label': ariaLabel,

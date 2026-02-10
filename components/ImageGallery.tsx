@@ -16,14 +16,6 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, autoPlayInterval);
-
-    return () => clearInterval(timer);
-  }, [currentIndex, autoPlayInterval]);
-
   const handleNext = () => {
     setDirection(1);
     setCurrentIndex((prev) => (prev + 1) % images.length);
@@ -33,6 +25,14 @@ export const ImageGallery: React.FC<ImageGalleryProps> = ({
     setDirection(-1);
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext();
+    }, autoPlayInterval);
+
+    return () => clearInterval(timer);
+  }, [currentIndex, autoPlayInterval, handleNext]);
 
   const slideVariants = {
     enter: (direction: number) => ({

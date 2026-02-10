@@ -11,7 +11,7 @@ interface ServiceCardProps {
   index: number;
 }
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Activity,
   Dna,
   Baby,
