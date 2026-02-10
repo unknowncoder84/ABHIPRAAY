@@ -6,13 +6,13 @@ import { fadeInVariant } from '@/utils/animations';
 import { ImageGallery } from '@/components/ImageGallery';
 
 const galleryImages = [
-  '/images/gallery/clinic-1.svg',
-  '/images/gallery/clinic-2.svg',
-  '/images/gallery/clinic-3.svg',
-  '/images/gallery/clinic-4.svg',
-  '/images/gallery/clinic-5.svg',
-  '/images/gallery/clinic-6.svg',
-  '/images/gallery/clinic-7.svg',
+  '/images/gallery/clinic-1.jpg',
+  '/images/gallery/clinic-2.jpg',
+  '/images/gallery/clinic-3.jpg',
+  '/images/gallery/clinic-4.jpg',
+  '/images/gallery/clinic-5.jpg',
+  '/images/gallery/clinic-6.jpg',
+  '/images/gallery/clinic-7.jpg',
 ];
 
 export const GallerySection = () => {
