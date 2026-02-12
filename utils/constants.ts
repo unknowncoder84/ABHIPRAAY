@@ -119,6 +119,11 @@ export const NAV_MENU_ITEMS: NavMenuItem[] = [
 export const HERO_HEADLINE = 'Advanced Ultrasound & Genetic Care with Precision and Trust';
 export const HERO_SUBTEXT = 'Premium diagnostic care with advanced ultrasound-guided interventions';
 
+export const BEFORE_AFTER_IMAGES = {
+  before: '/images/before-after/before.jpg',
+  after: '/images/before-after/after.jpg',
+};
+
 export const WHATSAPP_URL = `https://wa.me/${CONTACT_INFO.whatsapp}`;
 export const EMAIL_URL = `mailto:${CONTACT_INFO.email}`;
 export const PHONE_URL = `tel:${CONTACT_INFO.phone}`;

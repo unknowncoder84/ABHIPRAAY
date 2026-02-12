@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/utils/hooks';
 import { fadeInVariant } from '@/utils/animations';
 import { Target, Users, Award, Heart } from 'lucide-react';
+import { BeforeAfterSlider } from '@/components/BeforeAfterSlider';
+import { BEFORE_AFTER_IMAGES } from '@/utils/constants';
 
 export const AboutSection = () => {
   const { ref, controls } = useScrollAnimation();
@@ -89,12 +91,48 @@ export const AboutSection = () => {
           </div>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* Before/After Slider */}
         <motion.div
           initial="hidden"
           animate={controls}
           variants={fadeInVariant}
           transition={{ delay: 0.5 }}
+          className="mt-16 max-w-4xl mx-auto"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="text-center mb-8"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold font-poppins text-neutral-900 mb-3">
+              See the Difference
+            </h3>
+            <p className="text-neutral-600 font-inter">
+              Experience the quality of our diagnostic imaging
+            </p>
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            <BeforeAfterSlider
+              beforeImage={BEFORE_AFTER_IMAGES.before}
+              afterImage={BEFORE_AFTER_IMAGES.after}
+              beforeLabel="Before"
+              afterLabel="After"
+            />
+          </motion.div>
+        </motion.div>
+
+        {/* Features Grid */}
+        <motion.div
+          initial="hidden"
+          animate={controls}
+          variants={fadeInVariant}
+          transition={{ delay: 0.8 }}
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-16"
         >
           {features.map((feature, index) => {
@@ -104,7 +142,7 @@ export const AboutSection = () => {
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
+                transition={{ delay: 0.9 + index * 0.1 }}
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 className="bg-gradient-to-br from-primary-50 to-white p-6 rounded-xl border border-primary-100 shadow-sm hover:shadow-lg transition-all duration-300"
               >
